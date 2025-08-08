@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   woody.h                                            :+:      :+:    :+:   */
+/*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/08 19:02:15 by gmanique          #+#    #+#             */
-/*   Updated: 2025/08/08 19:47:53 by gmanique         ###   ########.fr       */
+/*   Created: 2025/08/08 19:43:18 by gmanique          #+#    #+#             */
+/*   Updated: 2025/08/08 22:31:32 by gmanique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WOODY_H
-# define WOODY_H
+#ifndef FUNCTIONS_H
+# define FUNCTIONS_H
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <errno.h>
-# include <sys/types.h>
-# include <sys/mman.h>
-# include <sys/syscall.h>
-# include "functions.h"
+# include "woody.h"
+
+/* Mettre les fonctions ici */
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*free_join(char *s1, char *s2, int free_type);
+
 
 #endif

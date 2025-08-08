@@ -6,7 +6,7 @@
 #    By: gmanique <gmanique@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/08 19:04:58 by gmanique          #+#    #+#              #
-#    Updated: 2025/08/08 19:17:01 by gmanique         ###   ########.fr        #
+#    Updated: 2025/08/08 22:41:38 by gmanique         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,20 +21,17 @@ OBJ_DIR = obj
 
 
 # AJOUTER ICI CHAQUE FICHIER .c AVEC LE DIRECTORY CORRESPONDANT (ex : utils/main_utils/util.c )
-SRC =	main.c
+SRC =	main.c	\
+		ft_strjoin.c
 
-
-OBJ = $(patsubst $(SRC_DIR)/%,%,$(SRC))
-OBJ := $(OBJ:.c=.o)
-OBJ := $(subst /,_,$(OBJ))
-OBJ := $(addprefix $(OBJ_DIR)/,$(OBJ))
+OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
-$(OBJ_DIR)/%.o: $(OBJ_DIR)
-	@src_file=$$(echo $* | sed 's/_/\//'); \
-	src_file=$(SRC_DIR)/$$src_file.c; \
-	$(CC) $(CFLAGS) $(INCLUDES) -c $$src_file -o $@
+# Cette règle compile chaque .o depuis son .c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@mkdir -p $(@D)          # crée le dossier où l'objet va être placé
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJ)
 	@echo "\033[0;32mCompiling woody_woodpacker..\e[m"
@@ -42,7 +39,7 @@ $(NAME): $(OBJ)
 	@echo "\033[1;32mWoody_woodpacker successfully compiled !\n\e[m"
 
 $(OBJ_DIR):
-	@echo "\n\033[0;32mCreating obj directory..\e[m"
+	@echo "\033[0;32mCreating obj directory..\e[m"
 	@mkdir -p $(OBJ_DIR)
 
 clean:
@@ -58,5 +55,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
 .SILENT: $(OBJ)
